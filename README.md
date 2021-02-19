@@ -16,3 +16,7 @@ optional arguments:
   -h, --help       show this help message and exit
   --output OUTPUT  BWPROT20 als Log-Datei in die angegebene Datei ausgeben (falls gewünscht)
 ```
+
+## Wie man es installieren kann
+
+`python -m pip install git+https://github.com/cozyGalvinism/bwprotanalyzer`
