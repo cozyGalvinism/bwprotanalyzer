@@ -182,7 +182,7 @@ class Protocol:
                     line = f"{entry.date}\t{entry.protocol_type}\tTEMPBELSORTTABEND\t{entry.user}\tBenutzer {entry.user} hat eine temporäre Belegsortierung/Tabelle abgeschlossen"
 
                 if line:
-                    fp.write(line + "\r\n")
+                    fp.write(line + "\n")
                     continue
 
                 if entry.status == ProtocolStatus.NEW:
@@ -191,8 +191,8 @@ class Protocol:
                     line = f"{entry.date}\t{entry.protocol_type}\tCHANGE\t{entry.user}\tBenutzer {entry.user} hat Datensatz {entry.index} im Bereich {entry.protocol_type} geändert:"
                     changes = [f"    {ch.field}: {ch.previous_value.strip()} -> {ch.value.strip()}" for ch in entry.changes if ch.value != ch.previous_value]
                     if changes:
-                        changes_lines = "\r\n".join(changes)
-                        line = line + "\r\n" + changes_lines
+                        changes_lines = "\n".join(changes)
+                        line = line + "\n" + changes_lines
                     else:
                         line = line + " Keine erkennbaren Änderungen"
                 elif entry.status == ProtocolStatus.DELETE:
@@ -203,7 +203,7 @@ class Protocol:
                     line = f"{entry.date}\t{entry.protocol_type}\tDELETEWANDL\t{entry.user}\tBenutzer {entry.user} hat Beleg {entry.index} durch Wandlung gelöscht"
                 
                 if line:
-                    fp.write(line + "\r\n")
+                    fp.write(line + "\n")
 
     def to_stdout(self):
         for entry in self.load_protocol():
@@ -262,7 +262,7 @@ class Protocol:
                 line = f"{entry.date}\t{entry.protocol_type}\tTEMPBELSORTTABEND\t{entry.user}\tBenutzer {entry.user} hat eine temporäre Belegsortierung/Tabelle abgeschlossen"
 
             if line:
-                sys.stdout.write(line + "\r\n")
+                sys.stdout.write(line + "\n")
                 continue
 
             if entry.status == ProtocolStatus.NEW:
@@ -271,8 +271,8 @@ class Protocol:
                 line = f"{entry.date}\t{entry.protocol_type}\tCHANGE\t{entry.user}\tBenutzer {entry.user} hat Datensatz {entry.index} im Bereich {entry.protocol_type} geändert:"
                 changes = [f"    {ch.field}: {ch.previous_value.strip()} -> {ch.value.strip()}" for ch in entry.changes if ch.value != ch.previous_value]
                 if changes:
-                    changes_lines = "\r\n".join(changes)
-                    line = line + "\r\n" + changes_lines
+                    changes_lines = "\n".join(changes)
+                    line = line + "\n" + changes_lines
                 else:
                     line = line + " Keine erkennbaren Änderungen"
             elif entry.status == ProtocolStatus.DELETE:
@@ -283,4 +283,4 @@ class Protocol:
                 line = f"{entry.date}\t{entry.protocol_type}\tDELETEWANDL\t{entry.user}\tBenutzer {entry.user} hat Beleg {entry.index} durch Wandlung gelöscht"
             
             if line:
-                sys.stdout.write(line + "\r\n")
+                sys.stdout.write(line + "\n")
